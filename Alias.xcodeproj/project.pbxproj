@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED751F58289012A5001A7D5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED751F57289012A5001A7D5E /* AppDelegate.swift */; };
-		ED751F5A289012A5001A7D5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED751F59289012A5001A7D5E /* SceneDelegate.swift */; };
 		ED751F5C289012A5001A7D5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED751F5B289012A5001A7D5E /* ViewController.swift */; };
-		ED751F5F289012A5001A7D5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED751F5D289012A5001A7D5E /* Main.storyboard */; };
 		ED751F61289012A6001A7D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED751F60289012A6001A7D5E /* Assets.xcassets */; };
 		ED751F64289012A6001A7D5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -18,9 +16,7 @@
 /* Begin PBXFileReference section */
 		ED751F54289012A5001A7D5E /* Alias.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alias.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED751F57289012A5001A7D5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ED751F59289012A5001A7D5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		ED751F5B289012A5001A7D5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ED751F5E289012A5001A7D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED751F60289012A6001A7D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED751F63289012A6001A7D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED751F65289012A6001A7D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,15 +52,37 @@
 		ED751F56289012A5001A7D5E /* Alias */ = {
 			isa = PBXGroup;
 			children = (
+				ED751F6D28901526001A7D5E /* Controller */,
+				ED751F6C2890151B001A7D5E /* View */,
+				ED751F6B28901513001A7D5E /* Model */,
 				ED751F57289012A5001A7D5E /* AppDelegate.swift */,
-				ED751F59289012A5001A7D5E /* SceneDelegate.swift */,
-				ED751F5B289012A5001A7D5E /* ViewController.swift */,
-				ED751F5D289012A5001A7D5E /* Main.storyboard */,
 				ED751F60289012A6001A7D5E /* Assets.xcassets */,
 				ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */,
 				ED751F65289012A6001A7D5E /* Info.plist */,
 			);
 			path = Alias;
+			sourceTree = "<group>";
+		};
+		ED751F6B28901513001A7D5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ED751F6C2890151B001A7D5E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ED751F5B289012A5001A7D5E /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ED751F6D28901526001A7D5E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +145,6 @@
 			files = (
 				ED751F64289012A6001A7D5E /* LaunchScreen.storyboard in Resources */,
 				ED751F61289012A6001A7D5E /* Assets.xcassets in Resources */,
-				ED751F5F289012A5001A7D5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,21 +157,12 @@
 			files = (
 				ED751F5C289012A5001A7D5E /* ViewController.swift in Sources */,
 				ED751F58289012A5001A7D5E /* AppDelegate.swift in Sources */,
-				ED751F5A289012A5001A7D5E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ED751F5D289012A5001A7D5E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ED751F5E289012A5001A7D5E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
