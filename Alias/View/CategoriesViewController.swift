@@ -12,7 +12,24 @@ class CategoriesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white 
+        buttonInit()
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "Categories Page"
     }
+    
+    func buttonInit() {
+          let buttonToSettings = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+          buttonToSettings.backgroundColor = UIColor.init(named: "materialGreen")
+          buttonToSettings.layer.cornerRadius = 10
+          buttonToSettings.setTitle("Настроить игру", for: .normal)
+          buttonToSettings.addTarget(self, action: #selector(onBtnToSettingsTap), for: .touchDown)
+        
+        view.addSubview(buttonToSettings)
+    }
+    
+    @objc func onBtnToSettingsTap(sender: UIButton!) {
+        self.navigationController?.pushViewController(SettingsViewController(), animated: true)
+    }    
 }

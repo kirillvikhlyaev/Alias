@@ -12,7 +12,9 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.title = "Game Page"
     }
 }

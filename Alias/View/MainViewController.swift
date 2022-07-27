@@ -8,56 +8,61 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
     
     let stack: UIStackView = {
         $0.axis = .vertical
-        $0.alignment = .center
+        $0.alignment = .fill
         $0.distribution = .fillEqually
-        $0.spacing = 8
+        $0.spacing = 15
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UIStackView())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         view.addSubview(stack)
         buttonsInit()
         initStackConstraints()
         
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        print("Clicked!")
+    @objc func onBtnToCategoriesTap(sender: UIButton!) {
+        self.navigationController?.pushViewController(CategoriesViewController(), animated: true)
+    }
+    
+    @objc func onBtnToRulesTap(sender: UIButton!) {
+        self.navigationController?.pushViewController(RulesViewController(), animated: true)
     }
     
     func initStackConstraints() {
         NSLayoutConstraint.activate([
-            stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            stack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant:  +100),
+            stack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            stack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +20),
+            stack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
     }
     
     func buttonsInit() {
-        let buttonToGame = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        buttonToGame.backgroundColor = UIColor.init(named: "materialGreen")
-        buttonToGame.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        buttonToGame.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        buttonToGame.layer.cornerRadius = 10
-        buttonToGame.setTitle("К игре", for: .normal)
-        buttonToGame.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        let buttonToCategories = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        buttonToCategories.backgroundColor = UIColor.init(named: "materialGreen")
+        buttonToCategories.layer.cornerRadius = 10
+        buttonToCategories.setTitle("Выбрать категорию", for: .normal)
+        buttonToCategories.titleEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+        buttonToCategories.addTarget(self, action: #selector(onBtnToCategoriesTap), for: .touchDown)
         
         
-        let buttonToRules = UIButton(frame: CGRect(x: 100, y: 175, width: 100, height: 50))
+        let buttonToRules = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         buttonToRules.backgroundColor = UIColor.init(named: "materialGreen")
-        buttonToRules.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        buttonToRules.widthAnchor.constraint(equalToConstant: 150).isActive = true
         buttonToRules.setTitle("Правила", for: .normal)
         buttonToRules.layer.cornerRadius = 10
-        buttonToRules.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        buttonToRules.titleEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+        buttonToRules.addTarget(self, action: #selector(onBtnToRulesTap), for: .touchUpInside)
         
-        stack.addArrangedSubview(buttonToGame)
+        stack.addArrangedSubview(buttonToCategories)
         stack.addArrangedSubview(buttonToRules)
     }
     
