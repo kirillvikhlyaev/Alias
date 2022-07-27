@@ -81,11 +81,11 @@
 		ED751F6C2890151B001A7D5E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ED751F5B289012A5001A7D5E /* MainViewController.swift */,
 				ED34C4C828912F5F0018DA15 /* RulesViewController.swift */,
+				ED751F5B289012A5001A7D5E /* MainViewController.swift */,
 				ED34C4CA28912F700018DA15 /* CategoriesViewController.swift */,
-				ED34C4CC28912F9E0018DA15 /* GameViewController.swift */,
 				ED34C4CE28912FC30018DA15 /* SettingsViewController.swift */,
+				ED34C4CC28912F9E0018DA15 /* GameViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
