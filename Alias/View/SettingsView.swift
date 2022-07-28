@@ -53,6 +53,6 @@ class SettingsView: UIViewController {
     }
     
     @objc func onBtnToGameTap() {
-        self.navigationController?.pushViewController(GameView(), animated: true)
+        self.navigationController?.pushViewController(GameViewController(), animated: true)
     }
 }
