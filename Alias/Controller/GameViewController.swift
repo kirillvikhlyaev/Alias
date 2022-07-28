@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
 	
 	var gameModel = GameModel(wordsDict: ["Apple": 1, "Watermelon": 1, "Rain": 4, "Field": 1], teams: ["Рыбы", "Коти", "Повелители"], chosenRoundTime: 10)
 	
-	var cardCurrentOffset: CGFloat = Constants.cardInitialOffset
+    var cardCurrentOffset: CGFloat = CGFloat(Constants.cardInitialOffset)
 	var cardTopAnchor: NSLayoutConstraint?
 	
 	override func viewDidLoad() {
@@ -78,7 +78,7 @@ class GameViewController: UIViewController {
 		
 		cardTopAnchor?.isActive = false
 		//MARK: - why 325? magic number?
-		cardTopAnchor = cardButton.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: cardCurrentOffset - Constants.magicNumber)
+        cardTopAnchor = cardButton.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: cardCurrentOffset - CGFloat(Constants.magicNumber))
 		cardTopAnchor?.isActive = true
 	}
 	
@@ -186,7 +186,7 @@ class GameViewController: UIViewController {
 		card.backgroundColor = .secondarySystemBackground
 		card.titleLabel?.font = UIFont.systemFont(ofSize: 40)
 		card.clipsToBounds = true
-		card.layer.cornerRadius = Constants.cardHeight / 2
+        card.layer.cornerRadius = CGFloat(Constants.cardHeight / 2)
 		card.isUserInteractionEnabled = true
 		card.layer.shadowColor = UIColor.black.cgColor
 		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCard(_:)))
@@ -291,9 +291,9 @@ class GameViewController: UIViewController {
 		
 		gesture.setTranslation(.zero, in: view)
 		
-		let totalOffset = Float(abs(cardCurrentOffset - Constants.cardInitialOffset))
+		let totalOffset = Float(abs(cardCurrentOffset - CGFloat(Constants.cardInitialOffset)))
 		
-		if cardCurrentOffset < Constants.cardInitialOffset {
+        if cardCurrentOffset < CGFloat(Constants.cardInitialOffset) {
 			let color = UIColor(hue: 0.3, saturation: (CGFloat(totalOffset) * 0.005), brightness: 1, alpha: 1)
 			cardButton.backgroundColor = color
 		} else {
@@ -314,12 +314,12 @@ class GameViewController: UIViewController {
 					//TODO: make smooth card returning
 //					let offsetToMove = self.cardCurrentOffset - Constants.cardInitialOffset < 0 ? (totalOffset - 50) * (-1) : totalOffset - 50
 //					self.cardButton.transform = CGAffineTransform(translationX: 0, y: CGFloat(offsetToMove))
-					self.cardCurrentOffset = Constants.cardInitialOffset
+                    self.cardCurrentOffset = CGFloat(Constants.cardInitialOffset)
 				}
 				view.setNeedsLayout()
 			case .cancelled:
 				//change score
-				cardCurrentOffset - Constants.cardInitialOffset < 0
+				cardCurrentOffset - CGFloat(Constants.cardInitialOffset) < 0
 				? gameModel.increaseScore() : gameModel.decreaseScore()
 				
 				updateScoreLabel()
@@ -331,7 +331,7 @@ class GameViewController: UIViewController {
 				cardButton.isOpaque = true
 				cardButton.backgroundColor = .white
 				cardButton.setTitle(gameModel.nextWord(), for: .normal)
-				cardCurrentOffset = Constants.cardInitialOffset
+                cardCurrentOffset = CGFloat(Constants.cardInitialOffset)
 
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 					UIView.animate(withDuration: 0.2) {
