@@ -9,11 +9,13 @@
 import UIKit
 
 class CategoriesView: UIViewController {
-    
+    var dataHandler = DataHandler()
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
         buttonInit()
+        
+        dataHandler.delegate = self
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Categories Page"
@@ -54,6 +56,20 @@ class CategoriesView: UIViewController {
     }
     
     @objc func onBtnToSettingsTap(sender: UIButton!) {
-        self.navigationController?.pushViewController(SettingsView(), animated: true)
+        
+        dataHandler.loadJSON(filename: "dictionary")
+//        self.navigationController?.pushViewController(SettingsView(), animated: true)
     }    
+}
+
+extension CategoriesView: DataHandlerDelegate {
+    func didFailWithError(error: Error) {
+        print("Возникла ошибка:  \(error)")
+    }
+    
+    func didUpdateCategories(_ dataHandler: DataHandler, categories: [CategoryData]) {
+        print("\(categories[0].description)")
+    }
+    
+    
 }
