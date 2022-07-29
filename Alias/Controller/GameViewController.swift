@@ -27,50 +27,9 @@ class GameViewController: UIViewController {
 		
 		updateTimer()
 		setupNewGame()
+        setupViews()
 		cardButton.setTitle(gameModel.currentWord, for: .normal)
-		
-		view.addSubview(topStack)
-		view.addSubview(cardButton)
-		view.addSubview(buttonsStack)
-		view.addSubview(pauseButton)
-		view.addSubview(skipCardButton)
-		view.addSubview(gameStateBackground)
-		view.addSubview(startGameButton)
-		
-		
-		NSLayoutConstraint.activate([
-			
-			topStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-			topStack.heightAnchor.constraint(equalToConstant: 150),
-			topStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-			topStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-			
-			cardButton.widthAnchor.constraint(equalToConstant: 250),
-			cardButton.heightAnchor.constraint(equalToConstant: 250),
-			cardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			
-			pauseButton.bottomAnchor.constraint(equalTo: buttonsStack.topAnchor, constant: -20),
-			pauseButton.heightAnchor.constraint(equalToConstant: 60),
-			pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			
-			buttonsStack.bottomAnchor.constraint(equalTo: skipCardButton.topAnchor, constant: -20),
-			buttonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-			buttonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-			
-			skipCardButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-			skipCardButton.heightAnchor.constraint(equalToConstant: 60),
-			skipCardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			
-			gameStateBackground.topAnchor.constraint(equalTo: view.topAnchor),
-			gameStateBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-			gameStateBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-			gameStateBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-			
-			startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-			startGameButton.heightAnchor.constraint(equalToConstant: 200),
-			startGameButton.widthAnchor.constraint(equalToConstant: 200),
-			startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-		])
+		setupConstraints()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -87,6 +46,52 @@ class GameViewController: UIViewController {
 		setupGameStateBackground()
 		super.viewWillAppear(animated)
 	}
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            
+            topStack.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            topStack.heightAnchor.constraint(equalToConstant: 150),
+            topStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            topStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            
+            cardButton.widthAnchor.constraint(equalToConstant: 250),
+            cardButton.heightAnchor.constraint(equalToConstant: 250),
+            cardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            pauseButton.bottomAnchor.constraint(equalTo: buttonsStack.topAnchor, constant: -20),
+            pauseButton.heightAnchor.constraint(equalToConstant: 60),
+            pauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            buttonsStack.bottomAnchor.constraint(equalTo: skipCardButton.topAnchor, constant: -20),
+            buttonsStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            buttonsStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            
+            skipCardButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            skipCardButton.heightAnchor.constraint(equalToConstant: 60),
+            skipCardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            gameStateBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            gameStateBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            gameStateBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gameStateBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            startGameButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            startGameButton.heightAnchor.constraint(equalToConstant: 200),
+            startGameButton.widthAnchor.constraint(equalToConstant: 200),
+            startGameButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    func setupViews() {
+        view.addSubview(topStack)
+        view.addSubview(cardButton)
+        view.addSubview(buttonsStack)
+        view.addSubview(pauseButton)
+        view.addSubview(skipCardButton)
+        view.addSubview(gameStateBackground)
+        view.addSubview(startGameButton)
+    }
 	
 	func setGradientBackground() {
 		let gradientLayer = CAGradientLayer()
