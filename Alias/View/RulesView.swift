@@ -17,9 +17,15 @@ class RulesView: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Rules Page"
     }
+
+}
+
+// MARK: - View setup
+
+extension RulesView {
     
     func setBackground() {
-        let backgroindImage = UIImage(named: "backgroundImage")
+        let backgroindImage = UIImage(named: K.Strings.backgroundImage)
         let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true

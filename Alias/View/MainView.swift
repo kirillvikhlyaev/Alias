@@ -40,7 +40,7 @@ class MainView: UIViewController {
     }
     
     func setBackground() {
-        let backgroindImage = UIImage(named: "backgroundImage")
+        let backgroindImage = UIImage(named: K.Strings.backgroundImage)
         let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -52,7 +52,7 @@ class MainView: UIViewController {
     }
     
     func setMainIcon() {
-        let mainIcon = UIImage(named: "mainIcon")
+        let mainIcon = UIImage(named: K.Strings.mainIcon)
         let imageView = UIImageView(image: mainIcon)
         imageView.clipsToBounds = true
         imageView.contentMode = .center
@@ -72,7 +72,7 @@ class MainView: UIViewController {
     
     func buttonsInit() {
         let buttonToCategories = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
-        buttonToCategories.backgroundColor = UIColor.init(named: "buttonsColor")
+        buttonToCategories.backgroundColor = K.Colors.buttonsColor
         buttonToCategories.layer.cornerRadius = 25
         buttonToCategories.setTitle("К игре", for: .normal)
         buttonToCategories.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
@@ -81,7 +81,7 @@ class MainView: UIViewController {
         
         
         let buttonToRules = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
-        buttonToRules.backgroundColor = UIColor.init(named: "buttonsColor")
+        buttonToRules.backgroundColor = K.Colors.buttonsColor
         buttonToRules.setTitle("Правила", for: .normal)
         buttonToRules.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         buttonToRules.layer.cornerRadius = 25
