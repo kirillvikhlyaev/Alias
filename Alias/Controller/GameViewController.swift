@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GameViewController: UIViewController {
 
@@ -15,10 +16,12 @@ class GameViewController: UIViewController {
 		gameModel = GameModel(wordsDict: wordsDict, teams: teams, chosenRoundTime: chosenRoundTime)
 	}
 	
-	var gameModel = GameModel(wordsDict: ["Apple": 1, "Watermelon": 1, "Rain": 4, "Field": 1], teams: ["Рыбы", "Коти", "Повелители"], chosenRoundTime: 10)
+    var gameModel = GameModel(wordsDict: ["Apple": 1, "Watermelon": 1, "Rain": 4, "Field": 1], teams: ["Рыбы", "Коти", "Повелители"], chosenRoundTime: 10)
 	
     var cardCurrentOffset: CGFloat = CGFloat(Constants.cardInitialOffset)
 	var cardTopAnchor: NSLayoutConstraint?
+    
+    var player: AVAudioPlayer?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -30,6 +33,9 @@ class GameViewController: UIViewController {
         setupViews()
 		cardButton.setTitle(gameModel.currentWord, for: .normal)
 		setupConstraints()
+        
+        // Joke Test
+        gameModel.createJoke()
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -356,14 +362,18 @@ class GameViewController: UIViewController {
 		scoreLabel.text = gameModel.scoreForTeam
 	}
 	
+    //TODO: Исправить - при нажатии на кнопку обновления срабатывает звук неудачи
+    
 	@objc func controlButtonPressed(_ sender: UIButton) {
 		UIView.animate(withDuration: 0.3) {
 			if sender.tag == 0 {
 				self.cardButton.transform = CGAffineTransform(translationX: 0, y: -500)
 				self.gameModel.increaseScore()
-			} else {
+                self.playSound(sound: "success")
+            } else {
 				self.cardButton.transform = CGAffineTransform(translationX: 0, y: 500)
 				self.gameModel.decreaseScore()
+                self.playSound(sound: "failure")
 			}
 			self.cardButton.layer.opacity = 0
 		}
@@ -381,6 +391,25 @@ class GameViewController: UIViewController {
 			}
 		}
 	}
+    
+    func playSound(sound: String) {
+        
+        guard let url = Bundle.main.url(forResource: sound, withExtension: "wav") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+            guard let player = player else { return }
+
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
 }
 
 extension GameViewController: GameModelDelegate {
