@@ -19,8 +19,17 @@ class SettingsView: UIViewController {
         self.title = "Settings Page"
     }
     
+    @objc func onBtnToGameTap() {
+        self.navigationController?.pushViewController(GameViewController(), animated: true)
+    }
+}
+
+// MARK: - View Setup
+
+extension SettingsView {
+
     func setBackground() {
-        let backgroindImage = UIImage(named: "backgroundImage")
+        let backgroindImage = UIImage(named: K.Strings.backgroundImage)
         let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -33,7 +42,7 @@ class SettingsView: UIViewController {
     
     func buttonInit() {
         let buttonToGame = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        buttonToGame.backgroundColor = UIColor.init(named: "buttonsColor")
+        buttonToGame.backgroundColor = K.Colors.buttonsColor
         buttonToGame.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         buttonToGame.layer.cornerRadius = 25
         buttonToGame.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -50,9 +59,5 @@ class SettingsView: UIViewController {
         let bottomConstraint = NSLayoutConstraint(item: buttonToGame, attribute: .bottomMargin, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: -25)
         
         view.addConstraints([leftConstraint, rightConstraint, bottomConstraint])
-    }
-    
-    @objc func onBtnToGameTap() {
-        self.navigationController?.pushViewController(GameViewController(), animated: true)
     }
 }

@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
 	
     var gameModel = GameModel(wordsDict: ["Apple": 1, "Watermelon": 1, "Rain": 4, "Field": 1], teams: ["Рыбы", "Коти", "Повелители"], chosenRoundTime: 10)
 	
-    var cardCurrentOffset: CGFloat = CGFloat(Constants.cardInitialOffset)
+	var cardCurrentOffset: CGFloat = CGFloat(Constants.cardInitialOffset)
 	var cardTopAnchor: NSLayoutConstraint?
     
     var player: AVAudioPlayer?
@@ -27,6 +27,13 @@ class GameViewController: UIViewController {
 		super.viewDidLoad()
 				
 		gameModel.delegate = self
+		navigationController?.navigationBar.isHidden = true
+		
+		//MARK: delete it if was configured in previous views
+		navigationController?.navigationBar.backgroundColor = .clear
+		navigationController?.navigationBar.barStyle = .black
+		navigationController?.navigationBar.tintColor = .white
+		///////
 		
 		updateTimer()
 		setupNewGame()
@@ -42,7 +49,6 @@ class GameViewController: UIViewController {
 		super.viewDidLayoutSubviews()
 		
 		cardTopAnchor?.isActive = false
-		//MARK: - why 325? magic number?
         cardTopAnchor = cardButton.topAnchor.constraint(equalTo: topStack.bottomAnchor, constant: cardCurrentOffset - CGFloat(Constants.magicNumber))
 		cardTopAnchor?.isActive = true
 	}
@@ -193,13 +199,10 @@ class GameViewController: UIViewController {
 	
 	lazy private var cardButton: UIButton = {
 		let card = UIButton(type: .custom)
-		card.setTitleColor(UIColor.label, for: .normal)
-		card.backgroundColor = .secondarySystemBackground
+		card.setTitleColor(UIColor.black, for: .normal)
+		card.backgroundColor = .white
 		card.titleLabel?.font = UIFont.systemFont(ofSize: 40)
-		card.clipsToBounds = true
         card.layer.cornerRadius = CGFloat(Constants.cardHeight / 2)
-		card.isUserInteractionEnabled = true
-		card.layer.shadowColor = UIColor.black.cgColor
 		let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCard(_:)))
 		card.addGestureRecognizer(panGesture)
 		card.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +210,6 @@ class GameViewController: UIViewController {
 		card.layer.shadowOffset = CGSize(width: 0, height: 0)
 		card.layer.shadowOpacity = 1.0
 		card.layer.shadowRadius = 8
-		card.layer.masksToBounds = false
 		return card
 	}()
 	
@@ -321,10 +323,6 @@ class GameViewController: UIViewController {
 				UIView.animate(withDuration: 0.2) {
 					self.cardButton.backgroundColor = .white
 					self.cardButton.layer.opacity = 1
-					
-					//TODO: make smooth card returning
-//					let offsetToMove = self.cardCurrentOffset - Constants.cardInitialOffset < 0 ? (totalOffset - 50) * (-1) : totalOffset - 50
-//					self.cardButton.transform = CGAffineTransform(translationX: 0, y: CGFloat(offsetToMove))
                     self.cardCurrentOffset = CGFloat(Constants.cardInitialOffset)
 				}
 				view.setNeedsLayout()
@@ -415,24 +413,26 @@ class GameViewController: UIViewController {
 extension GameViewController: GameModelDelegate {
 	
 	func stopGame() {
+		navigationController?.navigationBar.isHidden = false
 		cardButton.isUserInteractionEnabled = false
 		rightAnswerButton.isUserInteractionEnabled = false
 		wrongAnswerButton.isUserInteractionEnabled = false
 		skipCardButton.isUserInteractionEnabled = false
-		gameStateBackground.layer.opacity = 0
-		startGameButton.layer.opacity = 0
 		gameStateBackground.isHidden = false
 		startGameButton.isHidden = false
 		UIView.animate(withDuration: 0.2) {
 			self.gameStateBackground.layer.opacity = 1
 			self.startGameButton.layer.opacity = 1
+			self.navigationController?.navigationBar.layer.opacity = 1
 		}
 		startGameButton.setTitle("Продолжить", for: .normal)
 	}
+	
 	func startGame() {
 		UIView.animate(withDuration: 0.2) {
 			self.gameStateBackground.layer.opacity = 0
 			self.startGameButton.layer.opacity = 0
+			self.navigationController?.navigationBar.layer.opacity = 0
 		}
 		
 		cardButton.isUserInteractionEnabled = true
@@ -442,8 +442,10 @@ extension GameViewController: GameModelDelegate {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 			self.gameStateBackground.isHidden = true
 			self.startGameButton.isHidden = true
+			self.navigationController?.navigationBar.isHidden = true
 		}
 	}
+	
 	func updateTimer() {
 		timerLabel.text = "\(gameModel.timeLeft)"
 	}
@@ -466,7 +468,7 @@ struct Constants {
 	static var cardHeight = 250.0
 	static var cardInitialOffset = cardHeight * 1.5
 	
-	static let magicNumber = 325.0
+	static let magicNumber = 335.0
 }
 
 protocol GameModelDelegate: AnyObject {
