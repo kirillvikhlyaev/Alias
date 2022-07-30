@@ -47,6 +47,10 @@ class GameModel {
 	var currentTeam: String {
 		teams[currentTeamIndex]
 	}
+    
+    var jokeRequest = JokeRequest()
+    
+    var joke: String?
 	
 	private var score: Int {
 		get {
@@ -120,4 +124,11 @@ class GameModel {
 			roundNum += 1
 		}
 	}
+    
+    func createJoke() {
+        jokeRequest.request { joke in
+            self.joke = "\(joke.setup) - \(joke.punchline)"
+            print(self.joke)
+        }
+    }
 }

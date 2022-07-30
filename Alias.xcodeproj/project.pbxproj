@@ -10,7 +10,14 @@
 		17100FD928926C75006A72B2 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17100FD828926C75006A72B2 /* GameModel.swift */; };
 		17100FDB28926C96006A72B2 /* K.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17100FDA28926C96006A72B2 /* K.swift */; };
 		17100FDD28926CB7006A72B2 /* UtilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17100FDC28926CB7006A72B2 /* UtilityView.swift */; };
+
+		3327B5792894737E00B25471 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3327B5782894737E00B25471 /* success.wav */; };
+		3327B57B2894748A00B25471 /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3327B57A2894748A00B25471 /* failure.wav */; };
+		3327B57E2894770300B25471 /* JokeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3327B57D2894770300B25471 /* JokeRequest.swift */; };
+		3327B580289477FE00B25471 /* JokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3327B57F289477FE00B25471 /* JokeModel.swift */; };
+
 		ED0232292894483300C11522 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0232282894483300C11522 /* CategoryTableViewCell.swift */; };
+
 		ED34C4C928912F5F0018DA15 /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34C4C828912F5F0018DA15 /* RulesView.swift */; };
 		ED34C4CB28912F700018DA15 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34C4CA28912F700018DA15 /* CategoriesView.swift */; };
 		ED34C4CD28912F9E0018DA15 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED34C4CC28912F9E0018DA15 /* GameViewController.swift */; };
@@ -28,7 +35,14 @@
 		17100FD828926C75006A72B2 /* GameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		17100FDA28926C96006A72B2 /* K.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = K.swift; sourceTree = "<group>"; };
 		17100FDC28926CB7006A72B2 /* UtilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityView.swift; sourceTree = "<group>"; };
+
+		3327B5782894737E00B25471 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
+		3327B57A2894748A00B25471 /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failure.wav; sourceTree = "<group>"; };
+		3327B57D2894770300B25471 /* JokeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeRequest.swift; sourceTree = "<group>"; };
+		3327B57F289477FE00B25471 /* JokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeModel.swift; sourceTree = "<group>"; };
+
 		ED0232282894483300C11522 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+
 		ED34C4C828912F5F0018DA15 /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		ED34C4CA28912F700018DA15 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		ED34C4CC28912F9E0018DA15 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -55,12 +69,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+
+		3327B577289471D100B25471 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3327B57A2894748A00B25471 /* failure.wav */,
+				3327B5782894737E00B25471 /* success.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		3327B57C289476DE00B25471 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3327B57D2894770300B25471 /* JokeRequest.swift */,
+			);
+			path = Networking;
+
 		ED48F0A82893ABB400CA17B8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				ED39A4E42893B6E9000F2B76 /* dictionary.json */,
 			);
 			path = Data;
+
 			sourceTree = "<group>";
 		};
 		ED751F4B289012A5001A7D5E = {
@@ -88,6 +120,8 @@
 				ED751F6D28901526001A7D5E /* Controller */,
 				ED751F6C2890151B001A7D5E /* View */,
 				ED751F57289012A5001A7D5E /* AppDelegate.swift */,
+				3327B57C289476DE00B25471 /* Networking */,
+				3327B577289471D100B25471 /* Sounds */,
 				ED751F65289012A6001A7D5E /* Info.plist */,
 			);
 			path = Alias;
@@ -129,7 +163,11 @@
 				17100FDC28926CB7006A72B2 /* UtilityView.swift */,
 				ED751F60289012A6001A7D5E /* Assets.xcassets */,
 				ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */,
+
+				3327B57F289477FE00B25471 /* JokeModel.swift */,
+
 				ED0232282894483300C11522 /* CategoryTableViewCell.swift */,
+
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,8 +231,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED751F64289012A6001A7D5E /* LaunchScreen.storyboard in Resources */,
+
+				3327B5792894737E00B25471 /* success.wav in Resources */,
+
 				ED39A4E52893B6EA000F2B76 /* dictionary.json in Resources */,
+
 				ED751F61289012A6001A7D5E /* Assets.xcassets in Resources */,
+				3327B57B2894748A00B25471 /* failure.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,8 +252,13 @@
 				ED48F0AA2893AC4000CA17B8 /* DataHandler.swift in Sources */,
 				17100FDD28926CB7006A72B2 /* UtilityView.swift in Sources */,
 				ED751F5C289012A5001A7D5E /* MainView.swift in Sources */,
+
+				3327B580289477FE00B25471 /* JokeModel.swift in Sources */,
+
 				ED48F0A72893A8BD00CA17B8 /* CategoryData.swift in Sources */,
+
 				ED34C4C928912F5F0018DA15 /* RulesView.swift in Sources */,
+				3327B57E2894770300B25471 /* JokeRequest.swift in Sources */,
 				ED34C4CB28912F700018DA15 /* CategoriesView.swift in Sources */,
 				ED751F58289012A5001A7D5E /* AppDelegate.swift in Sources */,
 				17100FDB28926C96006A72B2 /* K.swift in Sources */,
