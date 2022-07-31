@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsView: UIViewController {
     
-    var commandAmountValue = 0
+    var commandAmountValue = 2
     
     let mainStack: UIStackView = {
         $0.axis = .vertical
@@ -21,15 +21,15 @@ class SettingsView: UIViewController {
         return $0
     }(UIStackView())
     
-        let commandStack: UIStackView = {
-            $0.axis = .vertical
-            $0.alignment = .fill
-            $0.distribution = .equalCentering
-            $0.spacing = 25
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            return $0
-            
-        }(UIStackView())
+    let commandStack: UIStackView = {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .equalCentering
+        $0.spacing = 25
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+        
+    }(UIStackView())
     
     let amountStack: UIStackView = {
         $0.axis = .horizontal
@@ -51,6 +51,10 @@ class SettingsView: UIViewController {
         mainStack.addArrangedSubview(commandStack)
         view.addSubview(mainStack)
         setupMainStackConstraints()
+        
+        getCommandName(name: "Голливудские голуби")
+        getCommandName(name: "Якутские ящерицы")
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Settings Page"
     }
@@ -74,20 +78,20 @@ class SettingsView: UIViewController {
         btnDecrement.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         btnDecrement.layer.cornerRadius = 5
         btnDecrement.addTarget(self, action: #selector(commandAmountDecrement), for: .touchDown)
-
+        
         let btnIncrement = UIButton()
         btnIncrement.backgroundColor = K.Colors.buttonsColor
         btnIncrement.setTitle("+", for: .normal)
         btnIncrement.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         btnIncrement.layer.cornerRadius = 5
         btnIncrement.addTarget(self, action: #selector(commandAmountIncrement), for: .touchDown)
-
-
+        
+        
         commandValueTitle.text = String(commandAmountValue)
         commandValueTitle.textColor = .white
         
-//        let stepper = UIStepper()
-//        stepper.tintColor = .white
+        //        let stepper = UIStepper()
+        //        stepper.tintColor = .white
         
         
         mainStack.addArrangedSubview(amountStack)
@@ -96,19 +100,23 @@ class SettingsView: UIViewController {
         amountStack.addArrangedSubview(btnDecrement)
         amountStack.addArrangedSubview(commandValueTitle)
         amountStack.addArrangedSubview(btnIncrement)
-//        amountStack.addArrangedSubview(stepper)
+        //        amountStack.addArrangedSubview(stepper)
     }
     
     @objc func commandAmountIncrement() {
-        commandAmountValue += 1
-        commandValueTitle.text = String(commandAmountValue)
-        getCommandName(name: "Утиные перышки")
+        if commandAmountValue < 4 {
+            commandAmountValue += 1
+            commandValueTitle.text = String(commandAmountValue)
+            getCommandName(name: "Утиные перышки")
+        }
     }
     
     @objc func commandAmountDecrement() {
-        commandAmountValue -= 1
-        commandValueTitle.text = String(commandAmountValue)
-        // Удалить название из массива и из стака
+        if commandAmountValue > 2 {
+            commandAmountValue -= 1
+            commandValueTitle.text = String(commandAmountValue)
+            // Удалить название из массива и из стака
+        }
     }
     
     func getCommandName(name: String) {
@@ -158,3 +166,10 @@ extension SettingsView {
         view.addConstraints([leftConstraint, rightConstraint, bottomConstraint])
     }
 }
+
+
+// TODO(kirillvikhlyaev):
+// 1. Добавить кнопку возле названия для удаления
+// 2. Добавить мозги
+// 3. Добавить словарик комичных названий
+// 4. Динамическое добавление/убавление позиций
