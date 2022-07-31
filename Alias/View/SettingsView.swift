@@ -9,12 +9,48 @@
 import UIKit
 
 class SettingsView: UIViewController {
-
+    
+    var commandAmountValue = 0
+    
+    let mainStack: UIStackView = {
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+        $0.spacing = 25
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIStackView())
+    
+        let commandStack: UIStackView = {
+            $0.axis = .vertical
+            $0.alignment = .fill
+            $0.distribution = .equalCentering
+            $0.spacing = 25
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            return $0
+            
+        }(UIStackView())
+    
+    let amountStack: UIStackView = {
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .equalCentering
+        $0.spacing = 25
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+        
+    }(UIStackView())
+    
+    let commandValueTitle = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
         buttonInit()
-        
+        setAmountChangeView()
+        mainStack.addArrangedSubview(commandStack)
+        view.addSubview(mainStack)
+        setupMainStackConstraints()
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = "Settings Page"
     }
@@ -22,12 +58,73 @@ class SettingsView: UIViewController {
     @objc func onBtnToGameTap() {
         self.navigationController?.pushViewController(GameViewController(), animated: true)
     }
+    
+    func setupMainStackConstraints() {
+        NSLayoutConstraint.activate([
+            mainStack.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            mainStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+    }
+    
+    func setAmountChangeView() {
+        
+        let btnDecrement = UIButton()
+        btnDecrement.backgroundColor = K.Colors.buttonsColor
+        btnDecrement.setTitle("-", for: .normal)
+        btnDecrement.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
+        btnDecrement.layer.cornerRadius = 5
+        btnDecrement.addTarget(self, action: #selector(commandAmountDecrement), for: .touchDown)
+
+        let btnIncrement = UIButton()
+        btnIncrement.backgroundColor = K.Colors.buttonsColor
+        btnIncrement.setTitle("+", for: .normal)
+        btnIncrement.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
+        btnIncrement.layer.cornerRadius = 5
+        btnIncrement.addTarget(self, action: #selector(commandAmountIncrement), for: .touchDown)
+
+
+        commandValueTitle.text = String(commandAmountValue)
+        commandValueTitle.textColor = .white
+        
+//        let stepper = UIStepper()
+//        stepper.tintColor = .white
+        
+        
+        mainStack.addArrangedSubview(amountStack)
+        
+        
+        amountStack.addArrangedSubview(btnDecrement)
+        amountStack.addArrangedSubview(commandValueTitle)
+        amountStack.addArrangedSubview(btnIncrement)
+//        amountStack.addArrangedSubview(stepper)
+    }
+    
+    @objc func commandAmountIncrement() {
+        commandAmountValue += 1
+        commandValueTitle.text = String(commandAmountValue)
+        getCommandName(name: "Утиные перышки")
+    }
+    
+    @objc func commandAmountDecrement() {
+        commandAmountValue -= 1
+        commandValueTitle.text = String(commandAmountValue)
+        // Удалить название из массива и из стака
+    }
+    
+    func getCommandName(name: String) {
+        let command = UILabel()
+        command.text = name // TODO: Вставка рандомного имени из списка, имена должны быть комичными
+        command.font = .systemFont(ofSize: 32, weight: .bold)
+        command.textColor = .white
+        
+        commandStack.addArrangedSubview(command)
+    }
 }
 
 // MARK: - View Setup
 
 extension SettingsView {
-
+    
     func setBackground() {
         let backgroindImage = UIImage(named: K.Strings.backgroundImage)
         let imageView = UIImageView(frame: view.bounds)
