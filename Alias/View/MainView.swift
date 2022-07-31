@@ -86,7 +86,7 @@ class MainView: UIViewController {
         buttonToRules.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         buttonToRules.layer.cornerRadius = 25
         buttonToRules.titleEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
-        buttonToRules.addTarget(self, action: #selector(onBtnToRulesTap), for: .touchUpInside)
+        buttonToRules.addTarget(self, action: #selector(onBtnToRulesTap), for: .touchDown)
         
         stack.addArrangedSubview(buttonToCategories)
         stack.addArrangedSubview(buttonToRules)
