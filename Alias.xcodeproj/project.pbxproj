@@ -24,6 +24,7 @@
 		ED751F5C289012A5001A7D5E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED751F5B289012A5001A7D5E /* MainView.swift */; };
 		ED751F61289012A6001A7D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED751F60289012A6001A7D5E /* Assets.xcassets */; };
 		ED751F64289012A6001A7D5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */; };
+		EDD2C97C2897E04A000176DD /* CategoriesHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2C97B2897E04A000176DD /* CategoriesHander.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		ED751F60289012A6001A7D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED751F63289012A6001A7D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED751F65289012A6001A7D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDD2C97B2897E04A000176DD /* CategoriesHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHander.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			children = (
 				ED34C4CC28912F9E0018DA15 /* GameViewController.swift */,
 				ED48F0A92893AC4000CA17B8 /* DataHandler.swift */,
+				EDD2C97B2897E04A000176DD /* CategoriesHander.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED327BEE2895A610005F4160 /* JokeModel.swift in Sources */,
+				EDD2C97C2897E04A000176DD /* CategoriesHander.swift in Sources */,
 				ED327BEC2895A5DE005F4160 /* JokeRequest.swift in Sources */,
 				ED34C4CD28912F9E0018DA15 /* GameViewController.swift in Sources */,
 				ED48F0AA2893AC4000CA17B8 /* DataHandler.swift in Sources */,

@@ -11,6 +11,9 @@ import UIKit
 class SettingsView: UIViewController {
     
     var commandAmountValue = 2
+    var category : CategoryData!
+    
+    let gameView = GameViewController()
     
     let mainStack: UIStackView = {
         $0.axis = .vertical
@@ -60,7 +63,9 @@ class SettingsView: UIViewController {
     }
     
     @objc func onBtnToGameTap() {
-        self.navigationController?.pushViewController(GameViewController(), animated: true)
+        self.gameView.amountCommands = commandAmountValue
+        self.gameView.category = category
+        self.navigationController?.pushViewController(gameView, animated: true)
     }
     
     func setupMainStackConstraints() {

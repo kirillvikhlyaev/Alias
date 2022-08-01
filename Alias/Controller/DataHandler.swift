@@ -8,36 +8,44 @@
 
 import Foundation
 
-protocol DataHandlerDelegate {
-    func didFailWithError(error: Error)
-    func didUpdateCategories(_ dataHandler: DataHandler, categories: [CategoryData])
-}
- 
+
 struct DataHandler {
-    var delegate: DataHandlerDelegate?
+    var amountCategories = 0
     
-    func loadJSON(filename: String){
+    mutating func loadJSON(filename: String) -> [CategoryData]? {
         if let path = Bundle.main.path(forResource: filename, ofType: "json") {
-        let url = URL(fileURLWithPath: path)
+            let url = URL(fileURLWithPath: path)
             do {
                 let data = try Data(contentsOf: url)
                 if let categories = self.parseJSON(dictionary: data) as [CategoryData]?{
-                    self.delegate?.didUpdateCategories(self, categories: categories)
+                    return categories
                 }
             } catch {
-                delegate?.didFailWithError(error: error)
+                return nil
             }
-        
+            
         }
+        return nil
     }
     
-    func parseJSON(dictionary: Data) -> [CategoryData]? {
+    
+    mutating func getCategoryByIndex(index: Int, filename: String) -> CategoryData? {
+        return self.loadJSON(filename: filename)?[index]
+    }
+    
+    mutating func getRandomCategory(index: Int, filename: String) -> CategoryData? {
+        // Исключать категорию если совпадает index
+        return self.loadJSON(filename: filename)?[Int.random(in: 0...4)]
+    }
+    
+    mutating func parseJSON(dictionary: Data) -> [CategoryData]? {
         let decoder = JSONDecoder()
         
         do {
             let decodedData = try decoder.decode(Categories.self, from: dictionary)
             
             var categories = [CategoryData]()
+            self.amountCategories = categories.count
             
             for i in 0...decodedData.categories.count-1 {
                 let name = decodedData.categories[i].name
@@ -51,7 +59,6 @@ struct DataHandler {
             }
             return categories
         } catch {
-            delegate?.didFailWithError(error: error)
             return nil
         }
     }
