@@ -57,8 +57,7 @@ extension CategoriesView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.dest.category = categories[indexPath.row]
-        self.navigationController?.pushViewController(dest, animated: true)
+		self.navigationController?.pushViewController(SettingsView(chosenCategoryIndex: indexPath.row), animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
