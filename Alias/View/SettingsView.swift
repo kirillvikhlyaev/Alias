@@ -71,15 +71,17 @@ class SettingsView: UIViewController {
         
         getCommandName(name: "Голливудские голуби")
         getCommandName(name: "Якутские ящерицы")
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.title = "Settings Page"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
 	//MARK: - Тут еще есть пункт выбранное время, его тоже можно будет инициализировать если успеем реализовать это на вью, пока ставлю дефолтно 60 секунд
     @objc func onBtnToGameTap() {
-        self.navigationController?.pushViewController(
-			GameViewController(chosenCategoryIndex: chosenCategoryIndex, teams: teamNames, chosenRoundTime: 60), animated: true)
+        let vc = GameViewController(chosenCategoryIndex: chosenCategoryIndex, teams: teamNames, chosenRoundTime: 60)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func setupMainStackConstraints() {
