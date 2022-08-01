@@ -14,28 +14,49 @@ enum GameState {
 }
 
 class GameModel {
-    init(wordsDict: [String:Int], teams: [String], chosenRoundTime: Int) {
-        self.wordsDict = wordsDict
-        self.words = wordsDict.keys.map({ $0 })
+	init(categoryIndex: Int, teams: [String], chosenRoundTime: Int) {
         self.teams = teams
         self.chosenRoundTime = chosenRoundTime
         self.timeLeft = chosenRoundTime
         teamsScore = Array<Int>.init(repeating: 0, count: teams.count)
+		
+		var dataHandler = DataHandler()
+		let path = Bundle.main.path(forResource: K.Strings.dictionary, ofType: "json")!
+		let url = URL(fileURLWithPath: path)
+		let data = try! Data(contentsOf: url)
+		if let categories = dataHandler.parseJSON(dictionary: data) {
+			self.categories = categories
+			print("Parsed JSON")
+		} else {
+			self.categories = [CategoryData.example]
+			print("Soething went wrong")
+		}
+		
+		var wordsArray = [Word]()
+		categories[categoryIndex].wordsDict.forEach({ wordsArray.append($0) })
+		words = wordsArray
+		
+		//TODO: - выбирать рандомные 20% времени
+		addRandomCardFromOtherCategory()
     }
+	
+	func addRandomCardFromOtherCategory() {
+		
+	}
+	
+	var categories: [CategoryData]
     
     weak var delegate: GameModelDelegate?
-    var gameState: GameState = .start {
-        didSet {
-            
-        }
-    }
+	
+    var gameState: GameState = .start
+	
     private(set) var roundNum = 1
     
     private(set) var chosenRoundTime = 2
     
     private var currentWordIndex = 0
-    private let wordsDict: [String:Int]
-    private let words: [String]
+
+	private let words: [Word]
     
     var timer: Timer?
     var timeLeft = 10
@@ -47,9 +68,11 @@ class GameModel {
     var currentTeam: String {
         teams[currentTeamIndex]
     }
+	
     var jokeRequest = JokeRequest()
     
     var joke: String?
+	
     private var score: Int {
         get {
             teamsScore![currentTeamIndex]
@@ -66,16 +89,16 @@ class GameModel {
     }
     
     var currentWord : String {
-        words[currentWordIndex]
+		words[currentWordIndex].word
     }
     
     func nextWord() -> String{
-        currentWordIndex = wordsDict.count - 1 > currentWordIndex ? currentWordIndex + 1 : 0
+        currentWordIndex = words.count - 1 > currentWordIndex ? currentWordIndex + 1 : 0
         return currentWord
     }
     
     func increaseScore() {
-        score += wordsDict[currentWord]!
+		score += words[currentWordIndex].points
     }
     
     func decreaseScore() {

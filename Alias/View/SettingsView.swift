@@ -9,11 +9,25 @@
 import UIKit
 
 class SettingsView: UIViewController {
-    
+	
+	var chosenCategoryIndex: Int
+	
+	init(chosenCategoryIndex: Int = 0) {
+		self.chosenCategoryIndex = chosenCategoryIndex
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	//после выбра названий команд, нужно будет поместить их а массив, чтобы передать в gameViewController
+	var teamNames = ["Голливудские голуби", "Якутские ящерицы"]
+	
     var commandAmountValue = 2
     var category : CategoryData!
     
-    let gameView = GameViewController()
+//    let gameView = GameViewController()
     
     let mainStack: UIStackView = {
         $0.axis = .vertical
@@ -62,10 +76,10 @@ class SettingsView: UIViewController {
         self.title = "Settings Page"
     }
     
+	//MARK: - Тут еще есть пункт выбранное время, его тоже можно будет инициализировать если успеем реализовать это на вью, пока ставлю дефолтно 60 секунд
     @objc func onBtnToGameTap() {
-        self.gameView.amountCommands = commandAmountValue
-        self.gameView.category = category
-        self.navigationController?.pushViewController(gameView, animated: true)
+        self.navigationController?.pushViewController(
+			GameViewController(chosenCategoryIndex: chosenCategoryIndex, teams: teamNames, chosenRoundTime: 60), animated: true)
     }
     
     func setupMainStackConstraints() {

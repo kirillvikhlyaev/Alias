@@ -10,16 +10,16 @@ import UIKit
 import AVFoundation
 
 class GameViewController: UIViewController {
-    
-    var amountCommands : Int!
-    var category : CategoryData!
-    
-    convenience init(wordsDict: [String: Int], teams: [String], chosenRoundTime: Int) {
-        self.init()
-        gameModel = GameModel(wordsDict: wordsDict, teams: teams, chosenRoundTime: chosenRoundTime)
-    }
-    
-    var gameModel = GameModel(wordsDict: ["Apple": 1, "Watermelon": 1, "Rain": 4, "Field": 1], teams: ["Рыбы", "Коти", "Повелители"], chosenRoundTime: 10)
+	init(chosenCategoryIndex: Int, teams: [String], chosenRoundTime: Int) {
+		gameModel = GameModel(categoryIndex: chosenCategoryIndex, teams: teams, chosenRoundTime: chosenRoundTime)
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
+	
+	var gameModel: GameModel
     
     var cardCurrentOffset: CGFloat = CGFloat(Constants.cardInitialOffset)
     var cardTopAnchor: NSLayoutConstraint?
@@ -36,7 +36,6 @@ class GameViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.tintColor = .white
-        ///////
         
         updateTimer()
         setupNewGame()
@@ -47,8 +46,8 @@ class GameViewController: UIViewController {
         gameModel.createJoke()
         
         //Check Data
-        print("Teams amount: \(amountCommands!)")
-        print("Category name: " + category.name)
+//        print("Teams amount: \(amountCommands!)")
+//        print("Category name: " + category.name)
     }
     
     override func viewDidLayoutSubviews() {
@@ -209,6 +208,8 @@ class GameViewController: UIViewController {
         card.backgroundColor = .white
         card.titleLabel?.font = UIFont.systemFont(ofSize: 40)
         card.layer.cornerRadius = CGFloat(Constants.cardHeight / 2)
+		card.titleLabel?.numberOfLines = 0
+		card.titleLabel?.textAlignment = .center
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCard(_:)))
         card.addGestureRecognizer(panGesture)
         card.translatesAutoresizingMaskIntoConstraints = false
@@ -334,8 +335,13 @@ class GameViewController: UIViewController {
             view.setNeedsLayout()
         case .cancelled:
             //change score
-            cardCurrentOffset - CGFloat(Constants.cardInitialOffset) < 0
-                ? gameModel.increaseScore() : gameModel.decreaseScore()
+				if cardCurrentOffset - CGFloat(Constants.cardInitialOffset) < 0 {
+					gameModel.increaseScore()
+					playSound(sound: "success")
+				} else {
+					gameModel.decreaseScore()
+					playSound(sound: "failure")
+				}
             
             updateScoreLabel()
             if gameModel.gameState == .lastCard {

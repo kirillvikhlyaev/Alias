@@ -17,6 +17,8 @@ struct CategoryData: Decodable {
     let emoji: String
     let description: String
     let wordsDict: [Word]
+	
+	static let example = CategoryData(name: "Example", emoji: "🤪", description: "", wordsDict: [Word(word: "Example", points: 1)])
 }
 
 struct Word: Decodable {
