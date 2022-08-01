@@ -22,9 +22,17 @@ class CategoriesView: UIViewController {
         
         categoriesHandler.delegate = self
         categoriesHandler.getCategories()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        self.title = "Categories Page"
-        
+        myTableView.frame = view.bounds
     }
     
 }
@@ -70,15 +78,9 @@ extension CategoriesView: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.Strings.reusCellID, for: indexPath) as! CategoryTableViewCell
-        
         cell.desc.text = categories[indexPath.row].description
-        
         cell.emoji.text = categories[indexPath.row].emoji
-        
-        let underlineAttribute = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.thick.rawValue]
-        let underlineAttributedString = NSAttributedString(string: categories[indexPath.row].name, attributes: underlineAttribute)
-        cell.title.attributedText = underlineAttributedString
-        
+        cell.title.text = categories[indexPath.row].name
         return cell
     }
 }

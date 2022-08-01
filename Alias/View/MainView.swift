@@ -40,11 +40,11 @@ class MainView: UIViewController {
     }
     
     func setBackground() {
-        let backgroindImage = UIImage(named: K.Strings.backgroundImage)
+        let backgroundImage = UIImage(named: K.Strings.backgroundImage)
         let imageView = UIImageView(frame: view.bounds)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = backgroindImage
+        imageView.image = backgroundImage
         imageView.center = view.center
         
         view.addSubview(imageView)

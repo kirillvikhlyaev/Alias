@@ -13,11 +13,12 @@ class RulesView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBackground()
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.title = "Rules Page"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
 }
 
 // MARK: - View setup

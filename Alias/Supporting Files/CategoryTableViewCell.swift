@@ -10,9 +10,22 @@ import UIKit
 
 class CategoryTableViewCell: UITableViewCell {
 
-    var title = UILabel()
-    var emoji = UILabel()
-    var desc = UILabel()
+    var title: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 22)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    var emoji: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 40)
+        return label
+    }()
+    var desc: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
     let cardColors: [UIColor] = [
         #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1),#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1),#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1),
     ]
@@ -37,9 +50,6 @@ class CategoryTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        // Set any attributes of your UI components here.
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = UIFont.systemFont(ofSize: 20)
         
         // Add the UI components
         verticalStack.addArrangedSubview(title)
