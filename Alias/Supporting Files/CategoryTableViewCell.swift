@@ -13,6 +13,9 @@ class CategoryTableViewCell: UITableViewCell {
     var title = UILabel()
     var emoji = UILabel()
     var desc = UILabel()
+    let cardColors: [UIColor] = [
+        #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 0.9098039269, green: 0.4784313738, blue: 0.6431372762, alpha: 1),#colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),#colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1),#colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1),
+    ]
     
     let verticalStack: UIStackView = {
         $0.axis = .vertical
@@ -43,7 +46,7 @@ class CategoryTableViewCell: UITableViewCell {
         verticalStack.addArrangedSubview(desc)
         horizontalStack.addArrangedSubview(verticalStack)
         horizontalStack.addArrangedSubview(emoji)
-        contentView.backgroundColor = #colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1)
+        contentView.backgroundColor = cardColors[Int.random(in: 0...5)]
         contentView.addSubview(horizontalStack)
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 10))
         NSLayoutConstraint.activate([

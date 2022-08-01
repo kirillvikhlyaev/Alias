@@ -12,28 +12,30 @@ class CategoriesView: UIViewController {
     
     var myTableView: UITableView!
     var categories: [CategoryData] = []
-    var dataHandler = DataHandler()
+    var categoriesHandler = CategoriesHandler()
+    
+    let dest = SettingsView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
         
-        dataHandler.delegate = self
+        categoriesHandler.delegate = self
+        categoriesHandler.getCategories()
         
         self.title = "Categories Page"
         
-        dataHandler.loadJSON(filename: K.Strings.dictionary)
     }
     
 }
 // MARK: - DataHandlerDelegate
 
-extension CategoriesView: DataHandlerDelegate {
+extension CategoriesView: CategoriesHandlerDelegate {
     func didFailWithError(error: Error) {
         print(error)
     }
     
-    func didUpdateCategories(_ dataHandler: DataHandler, categories: [CategoryData]) {
+    func didUpdateCategories(_ categoriesHandler: CategoriesHandler, categories: [CategoryData]) {
         self.categories = categories
         myTableView.reloadData()
     }
@@ -55,8 +57,8 @@ extension CategoriesView: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.navigationController?.pushViewController(SettingsView(), animated: true)
-        
+        self.dest.category = categories[indexPath.row]
+        self.navigationController?.pushViewController(dest, animated: true)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

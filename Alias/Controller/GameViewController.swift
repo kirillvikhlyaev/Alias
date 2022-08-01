@@ -11,6 +11,9 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
+    var amountCommands : Int!
+    var category : CategoryData!
+    
     convenience init(wordsDict: [String: Int], teams: [String], chosenRoundTime: Int) {
         self.init()
         gameModel = GameModel(wordsDict: wordsDict, teams: teams, chosenRoundTime: chosenRoundTime)
@@ -42,6 +45,10 @@ class GameViewController: UIViewController {
         setupConstraints()
         // Joke Test
         gameModel.createJoke()
+        
+        //Check Data
+        print("Teams amount: \(amountCommands!)")
+        print("Category name: " + category.name)
     }
     
     override func viewDidLayoutSubviews() {
