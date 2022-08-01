@@ -20,8 +20,7 @@ class GameModel {
         self.timeLeft = chosenRoundTime
         teamsScore = Array<Int>.init(repeating: 0, count: teams.count)
 		
-		let dataHandler = DataHandler()
-		
+		var dataHandler = DataHandler()
 		let path = Bundle.main.path(forResource: K.Strings.dictionary, ofType: "json")!
 		let url = URL(fileURLWithPath: path)
 		let data = try! Data(contentsOf: url)
@@ -36,9 +35,15 @@ class GameModel {
 		var wordsArray = [Word]()
 		categories[categoryIndex].wordsDict.forEach({ wordsArray.append($0) })
 		words = wordsArray
-		//TODO: - выбирать рандомные 20% времени
-    }
 		
+		//TODO: - выбирать рандомные 20% времени
+		addRandomCardFromOtherCategory()
+    }
+	
+	func addRandomCardFromOtherCategory() {
+		
+	}
+	
 	var categories: [CategoryData]
     
     weak var delegate: GameModelDelegate?
