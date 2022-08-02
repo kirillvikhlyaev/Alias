@@ -36,12 +36,23 @@ class GameModel {
 		categories[categoryIndex].wordsDict.forEach({ wordsArray.append($0) })
 		words = wordsArray
 		
-		//TODO: - выбирать рандомные 20% времени
 		addRandomCardFromOtherCategory()
     }
 	
 	func addRandomCardFromOtherCategory() {
-		
+		//TODO: - выбирать рандомные 20% времени
+		let numberOfRandomWords = Int(Double(words.count) * 0.2)
+		for _ in 0...numberOfRandomWords {
+			let randomCategory = categories.randomElement()
+			var randomWord = randomCategory?.wordsDict.randomElement()
+			randomWord?.points = 3
+			if var randomWord = randomWord {
+				randomWord.categoryName = randomCategory?.name
+				words.append(randomWord)
+				print(randomWord.word)
+			}
+		}
+		words.shuffle()
 	}
 	
 	var categories: [CategoryData]
@@ -56,7 +67,7 @@ class GameModel {
     
     private var currentWordIndex = 0
 
-	private let words: [Word]
+	private var words: [Word]
     
     var timer: Timer?
     var timeLeft = 10
@@ -88,11 +99,22 @@ class GameModel {
         "\(currentTeam): \(score)"
     }
     
-    var currentWord : String {
-		words[currentWordIndex].word
+    var currentWord : NSMutableAttributedString {
+		let resultString = NSMutableAttributedString()
+		let currentWord = words[currentWordIndex]
+		if let categoryName = currentWord.categoryName {
+			var attributes = [NSAttributedString.Key: AnyObject]()
+			attributes[.foregroundColor] = K.Colors.appBlue
+			attributes[.font] = UIFont.systemFont(ofSize: 22)
+			let categoryAttributedString = NSAttributedString(string: "\(categoryName)(х3)\n\n", attributes: attributes)
+			resultString.append(categoryAttributedString)
+		}
+		resultString.append(NSAttributedString(string: currentWord.word))
+		
+		return resultString
     }
     
-    func nextWord() -> String{
+    func nextWord() -> NSMutableAttributedString {
         currentWordIndex = words.count - 1 > currentWordIndex ? currentWordIndex + 1 : 0
         return currentWord
     }

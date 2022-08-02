@@ -40,14 +40,10 @@ class GameViewController: UIViewController {
         updateTimer()
         setupNewGame()
         setupViews()
-        cardButton.setTitle(gameModel.currentWord, for: .normal)
         setupConstraints()
         // Joke Test
         gameModel.createJoke()
-        
-        //Check Data
-//        print("Teams amount: \(amountCommands!)")
-//        print("Category name: " + category.name)
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,6 +59,10 @@ class GameViewController: UIViewController {
         setupGameStateBackground()
         super.viewWillAppear(animated)
     }
+	override func viewWillDisappear(_ animated: Bool) {
+		navigationController?.navigationBar.isHidden = true
+		super.viewWillDisappear(animated)
+	}
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -231,11 +231,11 @@ class GameViewController: UIViewController {
     
     private var pauseButton: UIButton = {
         let button = UIButton(type: .system)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+		button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         button.setTitleColor(UIColor.white, for: .normal)
         button.setImage(UIImage(systemName: "pause.fill"), for: .normal)
         button.setTitle("  ПАУЗА", for: .normal)
-        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 15)
         button.backgroundColor = UIColor.darkGray
         button.clipsToBounds = true
         button.layer.cornerRadius = 30
@@ -275,8 +275,10 @@ class GameViewController: UIViewController {
         button.setTitle("Сбросить", for: .normal)
         button.tag = 2
         button.setTitleColor(UIColor.white, for: .normal)
-        button.backgroundColor = UIColor.lightGray
-        button.setImage(UIImage(systemName: "arrow.down"), for: .normal)
+		button.backgroundColor = K.Colors.appBlue
+		let image = UIImage(systemName: "arrow.down")
+		image?.withTintColor(.white, renderingMode: .automatic)
+        button.setImage(image, for: .normal)
         button.layer.cornerRadius = 30
         button.clipsToBounds = true
         button.titleLabel?.font = UIFont.systemFont(ofSize: 30)
@@ -351,7 +353,8 @@ class GameViewController: UIViewController {
             //update card word
             cardButton.isOpaque = true
             cardButton.backgroundColor = .white
-            cardButton.setTitle(gameModel.nextWord(), for: .normal)
+//            cardButton.setTitle(gameModel.nextWord(), for: .normal)
+				cardButton.setAttributedTitle(gameModel.nextWord(), for: .normal)
             cardCurrentOffset = CGFloat(Constants.cardInitialOffset)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -393,7 +396,7 @@ class GameViewController: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.cardButton.setTitle(self.gameModel.nextWord(), for: .normal)
+			self.cardButton.setAttributedTitle(self.gameModel.nextWord(), for: .normal)
             self.cardButton.transform = CGAffineTransform(translationX: 0, y: 0)
             UIView.animate(withDuration: 0.2) {
                 self.cardButton.layer.opacity = 1
@@ -467,6 +470,7 @@ extension GameViewController: GameModelDelegate {
     
     func setupNewGame() {
         gameModel.gameState = .start
+		cardButton.setAttributedTitle(gameModel.currentWord, for: .normal)
         updateTimer()
         updateScoreLabel()
         startGameButton.setTitle("ПОЕХАЛИ!", for: .normal)
