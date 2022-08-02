@@ -5,30 +5,30 @@
 //  Created by Кирилл on 27.07.2022.
 //  Copyright © 2022 Kirill. All rights reserved.
 //
-
 import UIKit
 
 class SettingsView: UIViewController {
-	
-	var chosenCategoryIndex: Int
-	
-	init(chosenCategoryIndex: Int = 0) {
-		self.chosenCategoryIndex = chosenCategoryIndex
-		super.init(nibName: nil, bundle: nil)
-	}
-	
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	
-	//после выбра названий команд, нужно будет поместить их а массив, чтобы передать в gameViewController
-	var teamNames = ["Голливудские голуби", "Якутские ящерицы"]
-	
+    
+    var chosenCategoryIndex: Int
+    
+    init(chosenCategoryIndex: Int = 0) {
+        self.chosenCategoryIndex = chosenCategoryIndex
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //после выбра названий команд, нужно будет поместить их а массив, чтобы передать в gameViewController
+    var teamNames = ["Голливудские голуби", "Якутские ящерицы"]
+    
     var commandAmountValue = 2
     var category : CategoryData!
+    var settingsHandler = SettingsHandler()
     
 //    let gameView = GameViewController()
-    
+            let buttonToGame = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
     let mainStack: UIStackView = {
         $0.axis = .vertical
         $0.alignment = .fill
@@ -62,6 +62,7 @@ class SettingsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setBackground()
         buttonInit()
         setAmountChangeView()
@@ -69,8 +70,10 @@ class SettingsView: UIViewController {
         view.addSubview(mainStack)
         setupMainStackConstraints()
         
-        getCommandName(name: "Голливудские голуби")
-        getCommandName(name: "Якутские ящерицы")
+            setAmountStackConstraints()
+            
+        settingsHandler.delegate = self
+        settingsHandler.setupTeams()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,7 +81,7 @@ class SettingsView: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-	//MARK: - Тут еще есть пункт выбранное время, его тоже можно будет инициализировать если успеем реализовать это на вью, пока ставлю дефолтно 60 секунд
+    //MARK: - Тут еще есть пункт выбранное время, его тоже можно будет инициализировать если успеем реализовать это на вью, пока ставлю дефолтно 60 секунд
     @objc func onBtnToGameTap() {
         let vc = GameViewController(chosenCategoryIndex: chosenCategoryIndex, teams: teamNames, chosenRoundTime: 60)
         self.navigationController?.pushViewController(vc, animated: true)
@@ -115,9 +118,7 @@ class SettingsView: UIViewController {
         //        stepper.tintColor = .white
         
         
-        mainStack.addArrangedSubview(amountStack)
-        
-        
+        view.addSubview(amountStack)
         amountStack.addArrangedSubview(btnDecrement)
         amountStack.addArrangedSubview(commandValueTitle)
         amountStack.addArrangedSubview(btnIncrement)
@@ -128,7 +129,7 @@ class SettingsView: UIViewController {
         if commandAmountValue < 4 {
             commandAmountValue += 1
             commandValueTitle.text = String(commandAmountValue)
-            getCommandName(name: "Утиные перышки")
+            settingsHandler.getNewTeam()
         }
     }
     
@@ -136,6 +137,7 @@ class SettingsView: UIViewController {
         if commandAmountValue > 2 {
             commandAmountValue -= 1
             commandValueTitle.text = String(commandAmountValue)
+            settingsHandler.removeTeam()
             // Удалить название из массива и из стака
         }
     }
@@ -150,8 +152,19 @@ class SettingsView: UIViewController {
     }
 }
 
-// MARK: - View Setup
+extension SettingsView: SettingsHandlerDelegete {
+    func didFailWithError(error: Error) {
+        print("error")
+    }
+    
+    func didUpdateCategories(_ settingsHandler: SettingsHandler, team: [String]) {
+        self.teamNames = team
+    }
+    
+    
+}
 
+// MARK: - View Setup
 extension SettingsView {
     
     func setBackground() {
@@ -167,7 +180,7 @@ extension SettingsView {
     }
     
     func buttonInit() {
-        let buttonToGame = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+
         buttonToGame.backgroundColor = K.Colors.buttonsColor
         buttonToGame.titleLabel?.font = .systemFont(ofSize: 21, weight: .bold)
         buttonToGame.layer.cornerRadius = 25
@@ -185,6 +198,15 @@ extension SettingsView {
         let bottomConstraint = NSLayoutConstraint(item: buttonToGame, attribute: .bottomMargin, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: -25)
         
         view.addConstraints([leftConstraint, rightConstraint, bottomConstraint])
+    }
+    
+    func setAmountStackConstraints() {
+        NSLayoutConstraint.activate([
+            amountStack.bottomAnchor.constraint(equalTo: buttonToGame.topAnchor, constant: -25),
+            amountStack.heightAnchor.constraint(equalToConstant: 50),
+            amountStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +100),
+            amountStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
+        ])
     }
 }
 
