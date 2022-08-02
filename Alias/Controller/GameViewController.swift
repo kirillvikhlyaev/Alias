@@ -339,10 +339,10 @@ class GameViewController: UIViewController {
             //change score
 				if cardCurrentOffset - CGFloat(Constants.cardInitialOffset) < 0 {
 					gameModel.increaseScore()
-					playSound(sound: "success")
+//					playSound(sound: "success")
 				} else {
 					gameModel.decreaseScore()
-					playSound(sound: "failure")
+//					playSound(sound: "failure")
 				}
             
             updateScoreLabel()
@@ -381,11 +381,11 @@ class GameViewController: UIViewController {
             if sender.tag == 0 {
                 self.cardButton.transform = CGAffineTransform(translationX: 0, y: -500)
                 self.gameModel.increaseScore()
-                self.playSound(sound: "success")
+//                self.playSound(sound: "success")
             } else {
                 self.cardButton.transform = CGAffineTransform(translationX: 0, y: 500)
                 self.gameModel.decreaseScore()
-                self.playSound(sound: "failure")
+//                self.playSound(sound: "failure")
             }
             self.cardButton.layer.opacity = 0
         }

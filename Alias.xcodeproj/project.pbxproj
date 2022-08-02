@@ -27,6 +27,7 @@
 		ED751F5C289012A5001A7D5E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED751F5B289012A5001A7D5E /* MainView.swift */; };
 		ED751F61289012A6001A7D5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED751F60289012A6001A7D5E /* Assets.xcassets */; };
 		ED751F64289012A6001A7D5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED751F62289012A6001A7D5E /* LaunchScreen.storyboard */; };
+		ED84BD2A2899887500D2819A /* RulesHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED84BD292899887500D2819A /* RulesHandler.swift */; };
 		EDD2C97C2897E04A000176DD /* CategoriesHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD2C97B2897E04A000176DD /* CategoriesHander.swift */; };
 		EDE2587D2898E40A0076060E /* teamNames.json in Resources */ = {isa = PBXBuildFile; fileRef = EDE2587A2898E4090076060E /* teamNames.json */; };
 		EDE2587E2898E40A0076060E /* failure.wav in Resources */ = {isa = PBXBuildFile; fileRef = EDE2587B2898E40A0076060E /* failure.wav */; };
@@ -58,6 +59,7 @@
 		ED751F60289012A6001A7D5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED751F63289012A6001A7D5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED751F65289012A6001A7D5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED84BD292899887500D2819A /* RulesHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesHandler.swift; sourceTree = "<group>"; };
 		EDD2C97B2897E04A000176DD /* CategoriesHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHander.swift; sourceTree = "<group>"; };
 		EDE2587A2898E4090076060E /* teamNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = teamNames.json; sourceTree = "<group>"; };
 		EDE2587B2898E40A0076060E /* failure.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = failure.wav; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				EDD2C97B2897E04A000176DD /* CategoriesHander.swift */,
 				ED3631B72898E2DC009793CD /* SettingsHandler.swift */,
 				EDE258802898E84A0076060E /* TeamNamesHandler.swift */,
+				ED84BD292899887500D2819A /* RulesHandler.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				ED34C4CB28912F700018DA15 /* CategoriesView.swift in Sources */,
 				ED751F58289012A5001A7D5E /* AppDelegate.swift in Sources */,
 				17100FDB28926C96006A72B2 /* K.swift in Sources */,
+				ED84BD2A2899887500D2819A /* RulesHandler.swift in Sources */,
 				17100FD928926C75006A72B2 /* GameModel.swift in Sources */,
 				177B33182899319000A694A3 /* TeamWithColor.swift in Sources */,
 				ED34C4CF28912FC30018DA15 /* SettingsView.swift in Sources */,
