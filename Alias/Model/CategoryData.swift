@@ -23,5 +23,6 @@ struct CategoryData: Decodable {
 
 struct Word: Decodable {
     let word: String
-    let points: Int
+    var points: Int
+	var categoryName: String?
 }

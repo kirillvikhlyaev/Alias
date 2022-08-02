@@ -56,7 +56,7 @@ class CategoryTableViewCell: UITableViewCell {
         verticalStack.addArrangedSubview(desc)
         horizontalStack.addArrangedSubview(verticalStack)
         horizontalStack.addArrangedSubview(emoji)
-        contentView.backgroundColor = cardColors[Int.random(in: 0...5)]
+		contentView.backgroundColor = K.Colors.cardColors[Int.random(in: 0...5)]
         contentView.addSubview(horizontalStack)
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 10))
         NSLayoutConstraint.activate([
